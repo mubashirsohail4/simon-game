@@ -1,3 +1,9 @@
+/* Font importer */
+@font-face {
+  font-family: "Press Start 2P";
+  src: url(./fonts/PressStart2P-Regular.ttf);
+}
+
 body {
   text-align: center;
   background-color: #01585C;
