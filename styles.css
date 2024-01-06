@@ -6,7 +6,7 @@
 
 body {
   text-align: center;
-  background-color: #01585C;
+  background-color: #01585c;
   user-select: none;
   margin: 0;
 }
@@ -17,39 +17,30 @@ body {
 }
 
 #level-title {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 3rem;
   line-height: 70px;
-  text-shadow:
-    4px 4px 0 #000,
-    -4px 4px 0 #000,
-    -4px -4px 0 #000,
+  text-shadow: 4px 4px 0 #000, -4px 4px 0 #000, -4px -4px 0 #000,
     4px -4px 0 #000;
   margin: 50px 0 10px 0;
-  color: #FEF2BF;
+  color: #fef2bf;
 }
 
 #bottom-text {
   display: none;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 3rem;
   line-height: 70px;
-  text-shadow:
-    4px 4px 0 #000,
-    -4px 4px 0 #000,
-    -4px -4px 0 #000,
+  text-shadow: 4px 4px 0 #000, -4px 4px 0 #000, -4px -4px 0 #000,
     4px -4px 0 #000;
   margin-top: 10px;
-  color: #FEF2BF;
+  color: #fef2bf;
 }
 
 .container {
   display: block;
   width: 750px;
   margin: auto;
-}
-
-.row {
 }
 
 .btn {
@@ -85,4 +76,24 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+#start-btn {
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 30pt;
+  font-family: 'Press Start 2p';
+  border: none;
+  padding: 10px 3px 10px 10px;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 0.2em gray;
+  cursor: pointer;
 }

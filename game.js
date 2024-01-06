@@ -4,16 +4,18 @@ var userClickedPattern = [];
 var level = 0;
 var delayTime = 1000;
 
-$("#level-title").on("click", function () {
+$("#start-btn").on("click", function () {
   if (level === 0) {
     nextSequence();
   }
+  $("#start-btn").css("display","none");
 });
 
 function startOver() {
+  $("#bottom-text").css("display","none");
+  $("#start-btn").css("display","inline-block");
   gamePattern = [];
   userClickedPattern = [];
-  $("#bottom-text").text("Your Score: " + (level-1))
   level = 0;
 }
 
@@ -91,7 +93,7 @@ function checkAnswer() {
     } else {
       $("body").addClass("game-over");
       console.log(level);
-      $("#level-title").text("Game Over! Click here to Restart");
+      $("#level-title").text("Game Over! Your Score: " + (level-1));
       startOver();
       setTimeout(function () {
         playSound("wrong");
