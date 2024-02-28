@@ -8,6 +8,12 @@ body {
   text-align: center;
   background-color: #01585c;
   user-select: none;
+  height: 100vh;
+  font-family: "Press Start 2P", cursive;
+  color: #fef2bf;
+}
+
+h1 {
   margin: 0;
 }
 
@@ -16,38 +22,37 @@ body {
   background-color: #5c5617;
 }
 
-#level-title {
-  font-family: "Press Start 2P", cursive;
+.text {
   font-size: 3rem;
-  line-height: 70px;
   text-shadow: 4px 4px 0 #000, -4px 4px 0 #000, -4px -4px 0 #000,
     4px -4px 0 #000;
-  margin: 50px 0 10px 0;
-  color: #fef2bf;
+  line-height: 70px;
+}
+
+#level-title {
+  margin: 3vh 0 3vh 0;
 }
 
 #bottom-text {
+  margin: 4vh 0 3vh 0;
   display: none;
-  font-family: "Press Start 2P", cursive;
-  font-size: 3rem;
-  line-height: 70px;
-  text-shadow: 4px 4px 0 #000, -4px 4px 0 #000, -4px -4px 0 #000,
-    4px -4px 0 #000;
-  margin-top: 10px;
-  color: #fef2bf;
 }
 
 .container {
-  display: block;
-  width: 750px;
-  margin: auto;
+  margin: 0 auto 0 auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  row-gap: 40px;
+  column-gap: 40px;
+  width: 400px;
+  height: 400px;
 }
 
 .btn {
-  margin: 30px;
   display: inline-block;
-  height: 250px;
-  width: 250px;
+  height: 100%;
+  width: 100%;
   border: 6px solid black;
   border-radius: 20%;
 }
@@ -81,7 +86,7 @@ body {
 #start-btn {
   text-align: center;
   display: inline-block;
-  margin: 5px;
+  margin-top: 50px;
   font-weight: bold;
   font-size: 30pt;
   font-family: 'Press Start 2p';
@@ -96,4 +101,29 @@ body {
   border-radius: 7px;
   box-shadow: 0 0.2em gray;
   cursor: pointer;
+}
+
+footer {
+  position: fixed;
+  font-size: 0.7em;
+  bottom: 0;
+  right: 0;
+}
+
+@media (max-width: 768px){
+  .text {
+    font-size: calc(1.0rem + 3.3vw);
+    text-shadow: 3px 3px 0 #000, -3px 3px 0 #000, -3px -3px 0 #000,
+    3px -3px 0 #000;
+    line-height: 40px;
+  }
+
+  .container {
+    width: 300px;
+    height: 300px;
+  }
+
+  #start-btn {
+    font-size: calc(1.0rem + 3.3vw);
+  }
 }

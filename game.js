@@ -5,7 +5,7 @@ var level = 0;
 var delayTime = 1000;
 
 // To preload the sounds
-for (let i = 0; i <= buttonColors.length; i++) {
+for (let i = 0; i < buttonColors.length; i++) {
   var sound = new Audio("sounds/" + buttonColors[i] + ".mp3");
   sound.load();
 }
