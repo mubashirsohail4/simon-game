@@ -109,6 +109,11 @@ footer {
   right: 0;
 }
 
+.footer-link {
+  text-decoration: none !important;;
+  color: inherit;
+}
+
 @media (max-width: 768px){
   .text {
     font-size: calc(1.0rem + 3.3vw);
