@@ -10,11 +10,15 @@ for (let i = 0; i < buttonColors.length; i++) {
   sound.load();
 }
 
+// Function to start the game
+// This funtion is called when the user clicks the start button
 $("#start-btn").on("click", function () {
   $("#start-btn").css("display", "none");
   nextSequence();
 });
 
+// Function to generate the next sequence
+// This function generates a random color and adds it to the game sequence
 function nextSequence() {
   let randomNumber = Math.floor(Math.random() * 4);
   let randomChoosenColor = buttonColors[randomNumber];
@@ -35,6 +39,8 @@ function nextSequence() {
   $("#level-title").text("Level " + level);
 }
 
+// Function to play the sequence of colors
+// This function plays the game sequence with a delay between each color
 async function playSequence() {
   $("#bottom-text").css("display", "none");
   $("body").addClass("unclickable");
@@ -64,6 +70,8 @@ async function playSequence() {
   $("body").removeClass("unclickable");
 }
 
+// Function to handle button clicks
+// This function checks if the user has clicked the correct button
 $(".btn").on("click", function () {
   userChoosenColor = this.id;
 
@@ -83,6 +91,8 @@ $(".btn").on("click", function () {
   }
 });
 
+// Function to check the user's answer
+// This function compares the user's sequence with the game sequence
 function checkAnswer() {
   for (let i = 0; i < userSequence.length; i++) {
     if (userSequence[i] === gameSequence[i]) {
@@ -100,6 +110,8 @@ function checkAnswer() {
   }
 }
 
+// Function to reset the game
+// This function resets the game variables and UI elements
 function startOver() {
   $("#bottom-text").css("display", "none");
   $("#start-btn").css("display", "inline-block");
@@ -108,11 +120,15 @@ function startOver() {
   level = 0;
 }
 
+// Function to play sound
+// This function creates a new Audio object and plays the sound file
 function playSound(soundName) {
   let sound = new Audio("sounds/" + soundName + ".mp3");
   sound.play();
 }
 
+// Function to animate the button press
+// This function adds a class to the button when pressed and removes it after a short delay
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
   setTimeout(() => {
