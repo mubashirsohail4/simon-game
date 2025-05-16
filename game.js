@@ -1,12 +1,12 @@
-var buttonColors = ["red", "blue", "green", "yellow"];
-var gamePattern = [];
-var userClickedPattern = [];
-var level = 0;
-var delayTime = 1000;
+let buttonColors = ["red", "blue", "green", "yellow"];
+let gamePattern = [];
+let userClickedPattern = [];
+let level = 0;
+let delayTime = 1000;
 
 // To preload the sounds
 for (let i = 0; i < buttonColors.length; i++) {
-  var sound = new Audio("sounds/" + buttonColors[i] + ".mp3");
+  let sound = new Audio("sounds/" + buttonColors[i] + ".mp3");
   sound.load();
 }
 
@@ -26,8 +26,8 @@ function startOver() {
 }
 
 function nextSequence() {
-  var randomNumber = Math.floor(Math.random() * 4);
-  var randomChoosenColor = buttonColors[randomNumber];
+  let randomNumber = Math.floor(Math.random() * 4);
+  let randomChoosenColor = buttonColors[randomNumber];
 
   gamePattern.push(randomChoosenColor);
   
@@ -81,7 +81,7 @@ $(".btn").on("click", function () {
 });
 
 function playSound(soundName) {
-  var sound = new Audio("sounds/" + soundName + ".mp3");
+  let sound = new Audio("sounds/" + soundName + ".mp3");
   sound.play();
 }
 
