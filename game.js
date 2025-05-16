@@ -1,6 +1,6 @@
 let buttonColors = ["red", "blue", "green", "yellow"];
-let gamePattern = [];
-let userClickedPattern = [];
+let gameSequence = [];
+let userSequence = [];
 let level = 0;
 let delayTime = 1000;
 
@@ -11,54 +11,57 @@ for (let i = 0; i < buttonColors.length; i++) {
 }
 
 $("#start-btn").on("click", function () {
-  if (level === 0) {
-    nextSequence();
-  }
-  $("#start-btn").css("display","none");
+  $("#start-btn").css("display", "none");
+  nextSequence();
 });
-
-function startOver() {
-  $("#bottom-text").css("display","none");
-  $("#start-btn").css("display","inline-block");
-  gamePattern = [];
-  userClickedPattern = [];
-  level = 0;
-}
 
 function nextSequence() {
   let randomNumber = Math.floor(Math.random() * 4);
   let randomChoosenColor = buttonColors[randomNumber];
+  gameSequence.push(randomChoosenColor);
 
-  gamePattern.push(randomChoosenColor);
-  
-  if (level > 2) {
+  if (level > 7) {
+    delayTime = 500;
+  } else if (level > 5) {
+    delayTime = 600;
+  } else if (level > 3) {
+    delayTime = 800;
+  } else if (level > 2) {
     delayTime = 950;
-    if (level > 3) {
-      delayTime = 800;
-      if (level > 5) {
-        delayTime = 600;
-        if (level > 7) {
-          delayTime = 500;
-        }
-      }
-    }
   }
 
-  for (let i = 0; i < gamePattern.length; i++) {
-
-    setTimeout(function () {
-      playSound(gamePattern[i]);
-      $("#" + gamePattern[i])
-        .fadeOut(100)
-        .fadeIn(100);
-
-      }, delayTime * (i + 1));
-    }
-    
-  toggleClickable((gamePattern.length * delayTime) + 800);
-  
+  playSequence();
   level++;
   $("#level-title").text("Level " + level);
+}
+
+async function playSequence() {
+  $("#bottom-text").css("display", "none");
+  $("body").addClass("unclickable");
+
+  for (let i = 0; i < gameSequence.length; i++) {
+    $("body").addClass("unclickable");
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        playSound(gameSequence[i]);
+        $("#" + gameSequence[i])
+          .fadeOut(100)
+          .fadeIn(100);
+        resolve();
+      }, delayTime);
+    });
+  }
+
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      $("#bottom-text").css("display", "block");
+      $("body").removeClass("unclickable");
+      resolve();
+    }, delayTime);
+  });
+
+  $("body").removeClass("unclickable");
 }
 
 $(".btn").on("click", function () {
@@ -67,18 +70,43 @@ $(".btn").on("click", function () {
   playSound(this.id);
   animatePress(this.id);
 
-  if (level >= 1) userClickedPattern.push(userChoosenColor);
+  if (level >= 1) userSequence.push(userChoosenColor);
 
-  if (userClickedPattern.length <= gamePattern.length) {
+  if (userSequence.length <= gameSequence.length) {
     checkAnswer();
-    if (userClickedPattern.length === gamePattern.length && level != 0) {
-      setTimeout(function() {
+    if (userSequence.length === gameSequence.length && level != 0) {
+      setTimeout(function () {
         nextSequence();
       }, 500);
-      userClickedPattern = [];
+      userSequence = [];
     }
   }
 });
+
+function checkAnswer() {
+  for (let i = 0; i < userSequence.length; i++) {
+    if (userSequence[i] === gameSequence[i]) {
+      continue;
+    } else {
+      $("body").addClass("game-over");
+      $("#level-title").text("Game Over! Your Score: " + (level - 1));
+      startOver();
+      setTimeout(function () {
+        playSound("wrong");
+        $("body").removeClass("game-over");
+      }, 200);
+      break;
+    }
+  }
+}
+
+function startOver() {
+  $("#bottom-text").css("display", "none");
+  $("#start-btn").css("display", "inline-block");
+  gameSequence = [];
+  userSequence = [];
+  level = 0;
+}
 
 function playSound(soundName) {
   let sound = new Audio("sounds/" + soundName + ".mp3");
@@ -90,31 +118,4 @@ function animatePress(currentColor) {
   setTimeout(() => {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
-}
-
-function checkAnswer() {
-  for (let i = 0; i < userClickedPattern.length; i++) {
-    if (userClickedPattern[i] === gamePattern[i]) {
-      continue;
-    } else {
-      $("body").addClass("game-over");
-      console.log(level);
-      $("#level-title").text("Game Over! Your Score: " + (level-1));
-      startOver();
-      setTimeout(function () {
-        playSound("wrong");
-        $("body").removeClass("game-over");
-      }, 200);
-      break;
-    }
-  }
-}
-
-function toggleClickable(time) {
-  $("#bottom-text").css("display", "none");
-  $("body").addClass("unclickable");
-  setTimeout(function () {
-    $("#bottom-text").css("display", "block");
-    $("body").removeClass("unclickable");
-  }, time);
 }
